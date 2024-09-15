@@ -42,11 +42,10 @@ fun SplashScreenContent() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Example: Display an Image as logo
         Image(
             painter = painterResource(id = R.drawable.spotitip_logo__4_), // Use your app logo
             contentDescription = "App Logo",
-            modifier = Modifier.size(150.dp)
+            modifier = Modifier.size(350.dp)
         )
     }
 }
