@@ -66,4 +66,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Jetpack Compose dependencies
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.ui)
+    implementation(libs.material3)
+
+    // Navigation Compose
+    implementation(libs.androidx.navigation.compose)
 }
