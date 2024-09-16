@@ -7,7 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.kejaroshi.Auth.SplashScreen
-import com.example.yourapp.Home.HomeScreen
+import com.example.kejaroshi.Home.HomeScreen
+import com.example.kejaroshi.settingpage.SettingPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,10 @@ class MainActivity : ComponentActivity() {
                     SplashScreen(navController)
                 }
                 composable("home_screen") {
-                    HomeScreen()
+                    HomeScreen(navController)
+                }
+                composable("setting_page") {
+                    SettingPage()
                 }
             }
         }
