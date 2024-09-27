@@ -33,7 +33,7 @@ fun SplashScreen(navController: NavHostController) {
         // Navigasi ke home screen setelah delay
         LaunchedEffect(key1 = true) {
             delay(3000) // 3 detik
-            navController.navigate("home_screen")
+            navController.navigate("signin_page")
         }
     }
 }

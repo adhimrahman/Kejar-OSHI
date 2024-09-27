@@ -3,21 +3,19 @@ package com.example.kejaroshi.home
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text("Kejar OSHI - Home") })
-        },
-        content = {
-            // Main content of the Home Screen
-            Column {
-                Text("Selamat datang di Kejar OSHI!")
-                // Add other contents and actions here
-            }
-        }
-    )
+fun HomeScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Welcome to Kejar OSHI!")
+    }
 }
