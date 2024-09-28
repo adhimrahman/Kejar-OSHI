@@ -10,6 +10,7 @@ import com.example.kejaroshi.splash.SplashScreen
 import com.example.kejaroshi.auth.SignInActivity
 import com.example.kejaroshi.auth.SignUpActivity
 import com.example.kejaroshi.home.HomeScreen
+import com.example.kejaroshi.home.SettingPage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,9 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("home_page") {
                     HomeScreen()
+                }
+                composable("setting_page") {
+                    SettingPage(navController)
                 }
             }
         }
