@@ -22,17 +22,15 @@ fun SplashScreen(navController: NavHostController) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Menampilkan gambar logo di splash screen
         Image(
-            painter = painterResource(id = R.drawable.spotitip_logo__4_), // Gambar dari drawable
+            painter = painterResource(id = R.drawable.spotitip_logo__4_),
             contentDescription = "Logo",
-            modifier = Modifier.size(350.dp), // Ukuran gambar
+            modifier = Modifier.size(350.dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
         )
 
-        // Navigasi ke home screen setelah delay
         LaunchedEffect(key1 = true) {
-            delay(3000) // 3 detik
+            delay(3000)
             navController.navigate("signin_page")
         }
     }
