@@ -75,7 +75,7 @@ fun SignInActivity(navController: NavController) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { navController.navigate("signup_page") },
+            onClick = { navController.navigate("home_page") },
             modifier = Modifier
                 .width(380.dp)
                 .height(50.dp),
