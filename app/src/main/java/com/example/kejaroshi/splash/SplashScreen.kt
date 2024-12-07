@@ -23,7 +23,7 @@ fun SplashScreen(navController: NavHostController) {
         contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.spotitip_logo__4_),
+            painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logo",
             modifier = Modifier.size(350.dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
