@@ -17,20 +17,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "splash_screen") {
-                composable("splash_screen") {
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Splash.route
+            ) {
+                composable(Screen.Splash.route) {
                     SplashScreen(navController)
                 }
-                composable("signin_page") {
+                composable(Screen.SignIn.route) {
                     SignInActivity(navController)
                 }
-                composable("signup_page") {
+                composable(Screen.SignUp.route) {
                     SignUpActivity(navController)
                 }
-                composable("home_page") {
-                    HomeScreen()
+                composable(Screen.Home.route) {
+                    HomeScreen(navController)
                 }
-                composable("setting_page") {
+                composable(Screen.Settings.route) {
                     SettingPage(navController)
                 }
             }
@@ -39,6 +42,10 @@ class MainActivity : ComponentActivity() {
 }
 
 // Define the screens in your app
-//sealed class Screen(val route: String) {
-//    data object Splash : Screen("splash")
-//}
+sealed class Screen(val route: String) {
+    object Splash : Screen("splash_screen")
+    object SignIn : Screen("signin_page")
+    object SignUp : Screen("signup_page")
+    object Home : Screen("home_page")
+    object Settings : Screen("setting_page")
+}
