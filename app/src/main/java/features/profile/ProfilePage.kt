@@ -1,7 +1,5 @@
 package features.profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -12,16 +10,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
 import components.BottomNavigationBar
@@ -32,13 +25,11 @@ import features.auth.UserViewModel
 @Composable
 fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
     var selectedTab by remember { mutableStateOf("profile") }
-    val image : Int = R.drawable.mirsakonyol
 
     val name = userViewModel.name.value
     val email = userViewModel.email.value
-    val password = userViewModel.password.value
 
-    Scaffold (
+    Scaffold(
         topBar = { TopBar(title = "Sigap Bersama", backgroundColor = hijautua) },
         bottomBar = {
             BottomNavigationBar(
@@ -48,13 +39,14 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
             )
         }
     ) { innerPadding ->
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp))
-        {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             // Profile Card
-            ProfileCard( name = name, email = email, imageRes = R.drawable.mirsakonyol )
+            ProfileCard(name = name, email = email, imageRes = R.drawable.mirsakonyol)
 
             // Personal Data Card
             Card(
@@ -90,9 +82,13 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    TextField(value = "", onValueChange = {}, label = { Text("Password") },
+                    TextField(
+                        value = "",
+                        onValueChange = {},
+                        label = { Text("Password") },
                         modifier = Modifier.fillMaxWidth(),
-                        trailingIcon = { })
+                        trailingIcon = {}
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
                         onClick = { /* Handle edit action */ },
@@ -121,6 +117,32 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
                     Text("No badges yet", color = Color.Gray)
                 }
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Logout Button
+            Button(
+                onClick = { handleLogout(navController) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+            ) {
+                Text(
+                    text = "Logout",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
         }
+    }
+}
+
+fun handleLogout(navController: NavController) {
+    // FirebaseAuth.getInstance().signOut()
+
+    navController.navigate("signin") {
+        popUpTo("profile") { inclusive = true }
     }
 }
