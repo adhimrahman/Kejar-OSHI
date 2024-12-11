@@ -5,8 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,13 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,30 +28,8 @@ import components.BottomNavigationBar
 import components.CardComponent
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
+import components.SearchBar
 
-@Composable
-fun SearchBar(){
-    var searchQuery by remember { mutableStateOf("") }
-
-    OutlinedTextField(
-        value = searchQuery,
-        onValueChange = { searchQuery = it },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
-        placeholder = { Text("Search by creator, name, or location...", fontSize = 12.sp) },
-        textStyle = LocalTextStyle.current.copy(fontSize = 14.sp),
-        singleLine = true,
-        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
-        shape = MaterialTheme.shapes.medium,
-        colors = TextFieldDefaults.colors(
-            focusedLabelColor = MaterialTheme.colorScheme.primary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-            unfocusedContainerColor = Offwhite,
-            focusedContainerColor = Offwhite
-        )
-    )
-}
 
 @Composable
 fun LingkunganPage(navController: NavController) {
@@ -106,7 +75,7 @@ fun LingkunganPage(navController: NavController) {
 
             LazyColumn {
                 items(10) {
-                    CardComponent()
+                    CardComponent(image = R.drawable.mirsakonyol)
                 }
             }
         }

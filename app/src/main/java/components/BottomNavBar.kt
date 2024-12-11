@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("home")
+                navController.navigate("landing")
             }
         )
 
@@ -52,6 +54,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("bencana")
+                navController.navigate("bencana")
             }
         )
 
@@ -66,6 +69,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("linkungan")
+                navController.navigate("lingkungan")
             }
         )
 
@@ -80,20 +84,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("profile")
-            }
-        )
-
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
-            label = { Text("Settings") },
-            selected = selectedTab == "settings",
-            alwaysShowLabel = true,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color(0xFFE91E63),
-                unselectedIconColor = Color.Gray,
-            ),
-            onClick = {
-                onTabSelected("settings")
+                navController.navigate("profile")
             }
         )
     }
