@@ -2,12 +2,14 @@ package features.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -20,38 +22,112 @@ fun ProfilePage(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Profile Picture
-        AsyncImage(
-            model = "https://example.com/profile-pic.png", // Ganti dengan URL atau gambar default
-            contentDescription = "Foto Profil",
-            modifier = Modifier
-                .size(100.dp)
-                .padding(16.dp)
-        )
-
-        // User Info
-        Text("Nama Lengkap", fontSize = 20.sp)
-        Spacer(modifier = Modifier.height(4.dp))
-        Text("Email@example.com", fontSize = 16.sp)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Buttons
-        Button(
-            onClick = { navController.navigate("landing") },
-            modifier = Modifier.fillMaxWidth()
+        // Profile Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
-            Text("Logout")
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                AsyncImage(
+                    model = "https://example.com/profile-pic.png",
+                    contentDescription = "Profile Picture",
+                    modifier = Modifier.size(80.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Nama", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column { Text("Aktivitas yang telah diikuti") }
+                    Text("10")
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column { Text("Lencana") }
+                    Text("10")
+                }
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column { Text("Poin") }
+                    Text("10")
+                }
+            }
+        }
+
+        // Personal Data Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Data Pribadi", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(value = "", onValueChange = {}, label = { Text("Nama") }, modifier = Modifier.fillMaxWidth())
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(value = "", onValueChange = {}, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(value = "", onValueChange = {}, label = { Text("No Handphone") }, modifier = Modifier.fillMaxWidth())
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(value = "", onValueChange = {}, label = { Text("Password") },
+                    modifier = Modifier.fillMaxWidth(),
+                    trailingIcon = {
+                        IconButton(onClick = { /* Handle visibility toggle */ }) {
+                            Icon(painterResource(id = R.drawable.ic_visibility), contentDescription = "Toggle Password Visibility")
+                        }
+                    })
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { /* Handle edit action */ },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Text("Edit")
+                }
+            }
+        }
+
+        // Badges Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text("Lencana", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(8.dp))
+                // Add badge-related content here
+                Text("No badges yet", color = Color.Gray)
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewProfilePage (){
-    var navController = rememberNavController()
-    ProfilePage(navController = navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewProfilePage() {
+//    val navController = rememberNavController()
+//    ProfilePage(navController = navController)
+//}
