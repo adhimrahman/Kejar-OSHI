@@ -18,9 +18,10 @@ import androidx.navigation.NavController
 import com.example.kejaroshi.R
 
 @Composable
-fun SignInPage(navController: NavController) {
+fun SignInPage(navController: NavController, userViewModel: UserViewModel) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
 
     // Background with gradient
@@ -64,6 +65,24 @@ fun SignInPage(navController: NavController) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    // Name TextField
+                    OutlinedTextField(
+                        value = name,
+                        onValueChange = { name = it },
+                        label = { Text("Name") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedTextColor = Color.White,
+                            unfocusedTextColor = Color.White,
+                            focusedBorderColor = Color(0xFF3A7D44),
+                            unfocusedBorderColor = Color.Gray,
+                            cursorColor = Color(0xFF3A7D44)
+                        )
+                    )
+
                     // Email TextField
                     OutlinedTextField(
                         value = email,
@@ -121,6 +140,9 @@ fun SignInPage(navController: NavController) {
                                 errorMessage = "Email dan password harus diisi."
                             } else {
                                 errorMessage = ""
+                                userViewModel.name.value = name
+                                userViewModel.email.value = email
+                                userViewModel.password.value = password
                                 navController.navigate("landing")
                             }
                         },

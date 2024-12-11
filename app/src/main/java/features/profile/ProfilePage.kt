@@ -17,23 +17,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
 import components.BottomNavigationBar
+import features.auth.UserViewModel
 
 
 @Composable
-fun ProfilePage(navController: NavController) {
+fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
     var selectedTab by remember { mutableStateOf("profile") }
     val image : Int = R.drawable.mirsakonyol
+
+    val name = userViewModel.name.value
+    val email = userViewModel.email.value
+    val password = userViewModel.password.value
+
     Scaffold (
         topBar = {
             Row(modifier = Modifier
@@ -85,7 +88,9 @@ fun ProfilePage(navController: NavController) {
                         contentScale = ContentScale.Crop
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("Nama", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text("Nama: $name", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text("Email: $email", fontSize = 16.sp)
+
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -182,11 +187,4 @@ fun ProfilePage(navController: NavController) {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewProfilePage() {
-    val navController = rememberNavController()
-    ProfilePage(navController = navController, )
 }
