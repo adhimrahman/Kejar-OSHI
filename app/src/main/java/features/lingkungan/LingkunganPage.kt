@@ -34,7 +34,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import components.BottomNavigationBar
+import components.CardComponent
 import com.example.kejaroshi.R
+import com.example.kejaroshi.ui.theme.*
 
 @Composable
 fun SearchBar(){
@@ -45,15 +47,17 @@ fun SearchBar(){
         onValueChange = { searchQuery = it },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        placeholder = { Text("Search by creator, name, or location...") },
+            .padding(24.dp),
+        placeholder = { Text("Search by creator, name, or location...", fontSize = 12.sp) },
         textStyle = LocalTextStyle.current.copy(fontSize = 14.sp),
         singleLine = true,
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
         shape = MaterialTheme.shapes.medium,
         colors = TextFieldDefaults.colors(
             focusedLabelColor = MaterialTheme.colorScheme.primary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+            unfocusedContainerColor = Offwhite,
+            focusedContainerColor = Offwhite
         )
     )
 }
@@ -65,7 +69,7 @@ fun LingkunganPage(navController: NavController) {
         topBar = {
             Row(modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF365E32))
+                .background(hijautua)
                 .height(70.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
@@ -91,26 +95,18 @@ fun LingkunganPage(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
             Row(modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.Center)
                 {
-                    Text(text = "Zee <3 Gracia", fontSize = 46.sp, fontWeight = FontWeight.Bold)
+                    Text(text = "Limbah", fontSize = 40.sp, fontWeight = FontWeight.Bold)
                 }
 
             SearchBar()
 
             LazyColumn {
                 items(10) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            Text("Judul Lingkungan $it", fontSize = 18.sp)
-                            Text("Deskripsi Lingkungan...", fontSize = 14.sp)
-                        }
-                    }
+                    CardComponent()
                 }
             }
         }
