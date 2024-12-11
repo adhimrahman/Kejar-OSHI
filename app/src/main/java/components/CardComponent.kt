@@ -32,7 +32,7 @@ fun CardComponent(
     navController: NavController = rememberNavController(),
     detailPath: String = "detail",
     id: String = "0",
-    image: String? = null,
+    image: Int? = R.drawable.zakyella4ever,
     name: String = "Default Name",
     creator: String = "Unknown Creator",
     date: String = "01-01-2024",
@@ -99,12 +99,12 @@ fun CardComponent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCardComponent() {
-    val navController = rememberNavController() // Example NavController
+    val navController = rememberNavController()
     CardComponent(
         navController = navController,
         detailPath = "details",
         id = "123",
-        image = "R.drawable.mirsakonyol",
+        image = R.drawable.mirsakonyol,
         name = "Sample Title",
         creator = "John Doe",
         date = "2024-12-12",

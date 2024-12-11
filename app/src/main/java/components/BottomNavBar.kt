@@ -11,10 +11,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.example.kejaroshi.ui.icons.*
 
 @Composable
 fun BottomNavigationBar(
@@ -37,12 +39,13 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("home")
+                navController.navigate("landing")
             }
         )
 
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Bencana") },
-            label = { Text("Bencana") },
+            icon = { Icon(Warning, contentDescription = "Bencana") },
+            label = { Text("Disaster") },
             selected = selectedTab == "bencana",
             alwaysShowLabel = true,
             colors = NavigationBarItemDefaults.colors(
@@ -51,12 +54,13 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("bencana")
+                navController.navigate("bencana")
             }
         )
 
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Lingkungan") },
-            label = { Text("Lingkungan") },
+            icon = { Icon(Leaf, contentDescription = "Lingkungan") },
+            label = { Text("Nature") },
             selected = selectedTab == "lingkungan",
             alwaysShowLabel = true,
             colors = NavigationBarItemDefaults.colors(
@@ -65,6 +69,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("linkungan")
+                navController.navigate("lingkungan")
             }
         )
 
@@ -79,20 +84,7 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("profile")
-            }
-        )
-
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Settings, contentDescription = "Settings") },
-            label = { Text("Settings") },
-            selected = selectedTab == "settings",
-            alwaysShowLabel = true,
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = Color(0xFFE91E63),
-                unselectedIconColor = Color.Gray,
-            ),
-            onClick = {
-                onTabSelected("settings")
+                navController.navigate("profile")
             }
         )
     }
