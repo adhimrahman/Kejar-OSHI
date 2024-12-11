@@ -25,8 +25,9 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
 import components.BottomNavigationBar
+import components.ProfileCard
+import components.TopBar
 import features.auth.UserViewModel
-
 
 @Composable
 fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
@@ -38,23 +39,7 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
     val password = userViewModel.password.value
 
     Scaffold (
-        topBar = {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .background(hijautua)
-                .height(70.dp),
-                horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically)
-            {
-                Image(
-                    painter = painterResource(id = R.drawable.logo),
-                    contentDescription = "dfdsfd",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.padding(all = 19.dp)
-                )
-                Text("Sigap Bersama", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = Dp(8f)), color = Color.White)
-            }
-        },
+        topBar = { TopBar(title = "Sigap Bersama", backgroundColor = hijautua) },
         bottomBar = {
             BottomNavigationBar(
                 navController = navController,
@@ -69,52 +54,7 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
             verticalArrangement = Arrangement.spacedBy(16.dp))
         {
             // Profile Card
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    val painter = rememberAsyncImagePainter(image)
-                    Image(
-                        painter = painter,
-                        contentDescription = "Profile Picture",
-                        modifier = Modifier.size(80.dp).clip(RoundedCornerShape(100)),
-                        contentScale = ContentScale.Crop
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text("Nama: $name", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                    Text("Email: $email", fontSize = 16.sp)
-
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column { Text("Aktivitas yang telah diikuti") }
-                        Text("10")
-                    }
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column { Text("Lencana") }
-                        Text("10")
-                    }
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column { Text("Poin") }
-                        Text("10")
-                    }
-                }
-            }
+            ProfileCard( name = name, email = email, imageRes = R.drawable.mirsakonyol )
 
             // Personal Data Card
             Card(
@@ -152,11 +92,7 @@ fun ProfilePage(navController: NavController, userViewModel: UserViewModel) {
                     Spacer(modifier = Modifier.height(8.dp))
                     TextField(value = "", onValueChange = {}, label = { Text("Password") },
                         modifier = Modifier.fillMaxWidth(),
-                        trailingIcon = {
-//                        IconButton(onClick = { /* Handle visibility toggle */ }) {
-//                            Icon(painterResource(id = R.drawable.ic_visibility), contentDescription = "Toggle Password Visibility")
-//                        }
-                        })
+                        trailingIcon = { })
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
                         onClick = { /* Handle edit action */ },

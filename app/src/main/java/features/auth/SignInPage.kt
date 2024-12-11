@@ -11,11 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.kejaroshi.R
+import components.AuthButton
+import components.InputFieldCustom
 
 @Composable
 fun SignInPage(navController: NavController, userViewModel: UserViewModel) {
@@ -48,9 +49,7 @@ fun SignInPage(navController: NavController, userViewModel: UserViewModel) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(bottom = 24.dp)
+                modifier = Modifier.size(100.dp).padding(bottom = 24.dp)
             )
 
             // Card for login form
@@ -65,61 +64,13 @@ fun SignInPage(navController: NavController, userViewModel: UserViewModel) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Name TextField
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = { Text("Name") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
-                            focusedBorderColor = Color(0xFF3A7D44),
-                            unfocusedBorderColor = Color.Gray,
-                            cursorColor = Color(0xFF3A7D44)
-                        )
-                    )
+                    InputFieldCustom(value = name, onValueChange = { name = it }, label = "Name")
 
-                    // Email TextField
-                    OutlinedTextField(
-                        value = email,
-                        onValueChange = { email = it },
-                        label = { Text("Email") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
-                            focusedBorderColor = Color(0xFF3A7D44),
-                            unfocusedBorderColor = Color.Gray,
-                            cursorColor = Color(0xFF3A7D44)
-                        )
-                    )
+                    InputFieldCustom(value = email, onValueChange = { email = it }, label = "Email")
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Password TextField
-                    OutlinedTextField(
-                        value = password,
-                        onValueChange = { password = it },
-                        label = { Text("Password") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
-                            focusedBorderColor = Color(0xFF3A7D44),
-                            unfocusedBorderColor = Color.Gray,
-                            cursorColor = Color(0xFF3A7D44)
-                        )
-                    )
+                    InputFieldCustom(value = password, onValueChange = { password = it }, label = "Password")
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -134,25 +85,16 @@ fun SignInPage(navController: NavController, userViewModel: UserViewModel) {
                     }
 
                     // Sign In Button
-                    Button(
-                        onClick = {
-                            if (email.isBlank() || password.isBlank()) {
-                                errorMessage = "Email dan password harus diisi."
-                            } else {
-                                errorMessage = ""
-                                userViewModel.name.value = name
-                                userViewModel.email.value = email
-                                userViewModel.password.value = password
-                                navController.navigate("landing")
-                            }
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3A7D44))
-                    ) {
-                        Text("Sign In", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    AuthButton(text = "Sign In") {
+                        if (email.isBlank() || password.isBlank()) {
+                            errorMessage = "Email dan password harus diisi."
+                        } else {
+                            errorMessage = ""
+                            userViewModel.name.value = name
+                            userViewModel.email.value = email
+                            userViewModel.password.value = password
+                            navController.navigate("landing")
+                        }
                     }
                 }
             }

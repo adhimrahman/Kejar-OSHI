@@ -1,6 +1,5 @@
 package features.lingkungan
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,8 +28,6 @@ import components.CardComponent
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
 import components.SearchBar
-import okhttp3.internal.checkOffsetAndCount
-
 
 @Composable
 fun LingkunganPage(navController: NavController) {

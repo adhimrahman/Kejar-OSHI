@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kejaroshi.R
 import androidx.navigation.NavController
+import components.AuthButton
+import components.InputFieldCustom
 
 @Composable
 fun SignUpPage(navController: NavController) {
@@ -24,18 +26,17 @@ fun SignUpPage(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf("") }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF1A1A1A), // Dark color
-                        Color(0xFF3A7D44) // Greenish gradient
-                    )
+        modifier = Modifier.fillMaxSize().background(
+            Brush.verticalGradient(
+                colors = listOf(
+                    Color(0xFF1A1A1A), // Dark color
+                    Color(0xFF3A7D44) // Greenish gradient
                 )
-            ),
+            )
+        ),
         contentAlignment = Alignment.Center
     ) {
         Card(
@@ -72,97 +73,33 @@ fun SignUpPage(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Nama Lengkap Field
-                OutlinedTextField(
-                    value = fullName,
-                    onValueChange = { fullName = it },
-                    label = { Text("Nama Lengkap", color = Color.LightGray) },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
-                        focusedIndicatorColor = Color(0xFF3A7D44),
-                        unfocusedIndicatorColor = Color.LightGray
-                    )
-                )
+                InputFieldCustom( value = fullName, onValueChange = { fullName = it }, label = "Nama Lengkap")
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Email Field
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text("Email", color = Color.LightGray) },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
-                        focusedIndicatorColor = Color(0xFF3A7D44),
-                        unfocusedIndicatorColor = Color.LightGray
-                    )
-                )
+                InputFieldCustom( value = email, onValueChange = { email = it }, label = "Email" )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Password Field
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text("Password", color = Color.LightGray) },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
-                        focusedIndicatorColor = Color(0xFF3A7D44),
-                        unfocusedIndicatorColor = Color.LightGray
-                    )
-                )
+                InputFieldCustom( value = password, onValueChange = { password = it }, label = "Password")
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Konfirmasi Password Field
-                OutlinedTextField(
-                    value = confirmPassword,
-                    onValueChange = { confirmPassword = it },
-                    label = { Text("Konfirmasi Password", color = Color.LightGray) },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
-                        focusedIndicatorColor = Color(0xFF3A7D44),
-                        unfocusedIndicatorColor = Color.LightGray
-                    )
-                )
+                InputFieldCustom( value = confirmPassword, onValueChange = { confirmPassword = it }, label = "Konfirmasi Password")
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Daftar Button
-                Button(
-                    onClick = { navController.navigate("signin") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF3A7D44)
-                    ),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    Text(
-                        text = "Daftar",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
+                AuthButton(text = "Daftar") {
+                    if (fullName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                        errorMessage = "Semua kolom harus diisi."
+                    } else if (password != confirmPassword) {
+                        errorMessage = "Password tidak sesuai."
+                    } else {
+                        errorMessage = ""
+                        navController.navigate("signin")
+                    }
                 }
-
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Login Link
