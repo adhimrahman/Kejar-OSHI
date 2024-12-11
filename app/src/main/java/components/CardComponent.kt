@@ -1,6 +1,5 @@
 package components
 
-import android.location.Location
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -26,28 +25,31 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.icons.Calendar_month
+import com.example.kejaroshi.ui.theme.Offwhite
 
 @Composable
 fun CardComponent(
-    navController: NavController,
-    detailPath: String,
-    id: String,
-    image: String?,
-    name: String,
-    creator: String,
-    date: String,
-    location : String
+    navController: NavController = rememberNavController(),
+    detailPath: String = "detail",
+    id: String = "0",
+    image: String? = null,
+    name: String = "Default Name",
+    creator: String = "Unknown Creator",
+    date: String = "01-01-2024",
+    location: String = "Unknown Location",
+    cardBackgroundColor: Color = Offwhite
 ) {
     // Click action to navigate to the detail page
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(24.dp)
             .clickable {
                 navController.navigate("$detailPath/$id")
             },
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(8.dp)
+        elevation = CardDefaults.cardElevation(8.dp),
+        colors = CardDefaults.cardColors(containerColor = cardBackgroundColor)
     ) {
         Column {
             // Image part (top section)
