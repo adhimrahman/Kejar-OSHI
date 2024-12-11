@@ -1,4 +1,4 @@
-package features.bencana
+package com.example.kejaroshi.presentation.ui.limbah
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,13 +27,24 @@ import androidx.navigation.compose.rememberNavController
 import components.BottomNavigationBar
 import components.CardComponent
 import com.example.kejaroshi.R
-import com.example.kejaroshi.ui.theme.*
+import com.example.kejaroshi.presentation.ui.theme.hijautua
 import components.SearchBar
 
 @Composable
-fun BencanaPage(navController: NavController) {
-    val gambar : Int = R.drawable.zakyella4ever
-    var selectedTab by remember {mutableStateOf("bencana")}
+fun LimbahPage(
+    navController: NavController,
+    limbahViewModel: LimbahViewModel = remember { LimbahViewModel() }  // Get ViewModel instance
+) {
+    // Observe the state from ViewModel
+    val limbahList = limbahViewModel.limbahList
+
+    // Fetch data on initial load
+    LaunchedEffect(true) {
+        limbahViewModel.fetchLimbahData()
+    }
+
+
+    var selectedTab by remember {mutableStateOf("limbah")}
     Scaffold (
         topBar = {
             Row(modifier = Modifier
@@ -67,14 +79,26 @@ fun BencanaPage(navController: NavController) {
                 .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.Center)
             {
-                Text(text = "Benchana", fontSize = 40.sp, fontWeight = FontWeight.Bold)
+                Text(text = "Limbah", fontSize = 40.sp, fontWeight = FontWeight.Bold)
             }
 
             SearchBar()
 
-            LazyColumn {
-                items(10) {
-                    CardComponent(image = gambar)
+            LazyColumn(
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                items(limbahList.size) { index ->
+                    val limbahItem = limbahList[index]
+                    CardComponent(
+                        navController = navController,
+                        detailPath = "detail",
+                        id = limbahItem.name, // Assuming 'id' is a property of EnvironmentData
+                        image = limbahItem.image,
+                        name = limbahItem.name,
+                        creator = limbahItem.creator,
+                        date = limbahItem.date,
+                        location = limbahItem.locate
+                    )
                 }
             }
         }
@@ -83,7 +107,7 @@ fun BencanaPage(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewBencaanaPage (){
+fun PreviewLimbahPage (){
     val navController = rememberNavController()
-    BencanaPage(navController = navController)
+    LimbahPage(navController = navController)
 }

@@ -7,8 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import features.landing.LandingPage
-import features.bencana.BencanaPage
-import features.lingkungan.LingkunganPage
+import com.example.kejaroshi.presentation.ui.bencana.BencanaPage
+import com.example.kejaroshi.presentation.ui.limbah.LimbahPage
 import features.auth.SignInPage
 import features.auth.SignUpPage
 import features.auth.UserViewModel
@@ -25,8 +25,8 @@ fun NavGraph(navController: NavHostController, userViewModel: UserViewModel) {
         composable("splash_screen") { SplashScreen(navController) }
         composable("landing") { LandingPage(navController) }
         composable("bencana") { BencanaPage(navController) }
-        composable("lingkungan") { LingkunganPage(navController) }
         composable("signin") { SignInPage(navController, userViewModel = userViewModel) }
+        composable("lingkungan") { LimbahPage(navController) }
         composable("signup") { SignUpPage(navController) }
         composable("profile") { ProfilePage(navController, userViewModel = userViewModel) }
 

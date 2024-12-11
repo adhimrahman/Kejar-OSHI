@@ -1,4 +1,4 @@
-package com.example.kejaroshi.ui.icons
+package com.example.kejaroshi.presentation.ui.icons
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType

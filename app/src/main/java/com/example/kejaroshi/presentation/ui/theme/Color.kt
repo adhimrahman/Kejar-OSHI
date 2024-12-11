@@ -1,4 +1,4 @@
-package com.example.kejaroshi.ui.theme
+package com.example.kejaroshi.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

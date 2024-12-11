@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kejaroshi.ui.theme.Offwhite
+import com.example.kejaroshi.presentation.ui.theme.Offwhite
 
 @Composable
 fun SearchBar(){
