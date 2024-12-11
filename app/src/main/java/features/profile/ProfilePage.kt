@@ -41,7 +41,7 @@ fun ProfilePage(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AsyncImage(
-                    model = "https://example.com/profile-pic.png",
+                    model = R.drawable.logo,
                     contentDescription = "Profile Picture",
                     modifier = Modifier.size(80.dp)
                 )
@@ -101,9 +101,10 @@ fun ProfilePage(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { /* Handle edit action */ },
-                    modifier = Modifier.align(Alignment.End)
+                    modifier = Modifier.align(Alignment.End),
+                    colors = ButtonDefaults.buttonColors(hijautua)
                 ) {
-                    Text("Edit", color = hijautua)
+                    Text("Edit")
                 }
             }
         }
@@ -122,7 +123,6 @@ fun ProfilePage(navController: NavController) {
             ) {
                 Text("Lencana", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(8.dp))
-                // Add badge-related content here
                 Text("No badges yet", color = Color.Gray)
             }
         }
