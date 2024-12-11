@@ -1,4 +1,4 @@
-package com.example.kejaroshi.splash
+package splash
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
@@ -30,7 +30,7 @@ fun SplashScreen(navController: NavHostController) {
             animationSpec = tween(durationMillis = 1000, easing = EaseInOutCubic)
         )
         delay(2000) // Total durasi splash screen
-        navController.navigate("signin_page") {
+        navController.navigate("signin") {
             popUpTo("splash_screen") { inclusive = true } // Hapus splash screen dari back stack
         }
     }

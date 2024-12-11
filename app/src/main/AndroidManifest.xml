@@ -14,17 +14,15 @@
         android:theme="@style/Theme.KejarOSHI"
         tools:targetApi="31">
 
-    <!-- SplashScreen sebagai layar awal -->
-    <activity
-        android:name="com.example.kejaroshi.MainActivity"
-        android:exported="true"
-        android:theme="@style/Theme.KejarOSHI">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-
-</application>
-
-    </manifest>
+        <!-- SplashScreen sebagai layar awal -->
+        <activity
+            android:name="com.example.kejaroshi.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KejarOSHI">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
