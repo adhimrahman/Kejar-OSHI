@@ -99,7 +99,7 @@ fun CardComponent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewCardComponent() {
-    val navController = rememberNavController() // Example NavController
+    val navController = rememberNavController()
     CardComponent(
         navController = navController,
         detailPath = "details",

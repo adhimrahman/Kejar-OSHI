@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.example.kejaroshi.ui.icons.*
 
 @Composable
 fun BottomNavigationBar(
@@ -41,8 +42,8 @@ fun BottomNavigationBar(
         )
 
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Bencana") },
-            label = { Text("Bencana") },
+            icon = { Icon(Warning, contentDescription = "Bencana") },
+            label = { Text("Disaster") },
             selected = selectedTab == "bencana",
             alwaysShowLabel = true,
             colors = NavigationBarItemDefaults.colors(
@@ -55,8 +56,8 @@ fun BottomNavigationBar(
         )
 
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Lingkungan") },
-            label = { Text("Lingkungan") },
+            icon = { Icon(Leaf, contentDescription = "Lingkungan") },
+            label = { Text("Nature") },
             selected = selectedTab == "lingkungan",
             alwaysShowLabel = true,
             colors = NavigationBarItemDefaults.colors(
