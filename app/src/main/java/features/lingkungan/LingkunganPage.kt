@@ -1,5 +1,6 @@
 package features.lingkungan
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,9 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.foundation.Image
-import androidx.compose.material3.rememberSwipeToDismissBoxState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,8 +34,29 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import components.BottomNavigationBar
-import features.profile.ProfilePage
 import com.example.kejaroshi.R
+
+@Composable
+fun SearchBar(){
+    var searchQuery by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = searchQuery,
+        onValueChange = { searchQuery = it },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        placeholder = { Text("Search by creator, name, or location...") },
+        textStyle = LocalTextStyle.current.copy(fontSize = 14.sp),
+        singleLine = true,
+        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
+        shape = MaterialTheme.shapes.medium,
+        colors = TextFieldDefaults.colors(
+            focusedLabelColor = MaterialTheme.colorScheme.primary,
+            unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
+    )
+}
 
 @Composable
 fun LingkunganPage(navController: NavController) {
@@ -70,25 +96,9 @@ fun LingkunganPage(navController: NavController) {
                 {
                     Text(text = "Zee <3 Gracia", fontSize = 46.sp, fontWeight = FontWeight.Bold)
                 }
-            var searchQuery by remember { mutableStateOf("") }
 
-            TextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                placeholder = { Text("Search...") },
-                textStyle = LocalTextStyle.current.copy(fontSize = 16.sp),
-                singleLine = true,
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
-                shape = MaterialTheme.shapes.medium,
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                    unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
-            )
+            SearchBar()
+
             LazyColumn {
                 items(10) {
                     Card(
