@@ -32,7 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import com.example.kejaroshi.ui.theme.hijautua
+import com.example.kejaroshi.presentation.ui.theme.hijautua
 import components.BottomNavigationBar
 
 @Composable

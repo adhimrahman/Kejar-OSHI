@@ -16,7 +16,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.example.kejaroshi.ui.icons.*
+import com.example.kejaroshi.presentation.ui.icons.Leaf
+import com.example.kejaroshi.presentation.ui.icons.Warning
 
 @Composable
 fun BottomNavigationBar(

@@ -24,15 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
-import com.example.kejaroshi.ui.icons.Calendar_month
-import com.example.kejaroshi.ui.theme.Offwhite
+import com.example.kejaroshi.presentation.ui.icons.Calendar_month
+import com.example.kejaroshi.presentation.ui.theme.Offwhite
 
 @Composable
 fun CardComponent(
     navController: NavController = rememberNavController(),
     detailPath: String = "detail",
     id: String = "0",
-    image: Int? = R.drawable.zakyella4ever,
+    image: String? = null,
     name: String = "Default Name",
     creator: String = "Unknown Creator",
     date: String = "01-01-2024",
@@ -104,7 +104,7 @@ fun PreviewCardComponent() {
         navController = navController,
         detailPath = "details",
         id = "123",
-        image = R.drawable.mirsakonyol,
+        image = null,
         name = "Sample Title",
         creator = "John Doe",
         date = "2024-12-12",

@@ -1,4 +1,4 @@
-package features.bencana
+package com.example.kejaroshi.presentation.ui.bencana
 
 
 import androidx.compose.foundation.Image
@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,12 +28,23 @@ import androidx.navigation.compose.rememberNavController
 import components.BottomNavigationBar
 import components.CardComponent
 import com.example.kejaroshi.R
-import com.example.kejaroshi.ui.theme.*
+import com.example.kejaroshi.presentation.ui.theme.hijautua
 import components.SearchBar
 
 @Composable
-fun BencanaPage(navController: NavController) {
-    val gambar : Int = R.drawable.zakyella4ever
+fun BencanaPage(
+    navController: NavController,
+    bencanaViewModel: BencanaViewModel = remember { BencanaViewModel() }  // Get ViewModel instance
+) {
+    // Observe the state from ViewModel
+    val bencanaList = bencanaViewModel.bencanaList
+
+    // Fetch data on initial load
+    LaunchedEffect(true) {
+        bencanaViewModel.fetchBencanaData()
+    }
+
+
     var selectedTab by remember {mutableStateOf("bencana")}
     Scaffold (
         topBar = {
@@ -73,9 +85,21 @@ fun BencanaPage(navController: NavController) {
 
             SearchBar()
 
-            LazyColumn {
-                items(10) {
-                    CardComponent(image = gambar)
+            LazyColumn(
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                items(bencanaList.size) { index ->
+                    val bencanaItem = bencanaList[index]
+                    CardComponent(
+                        navController = navController,
+                        detailPath = "detail",
+                        id = bencanaItem.name, // Assuming 'id' is a property of EnvironmentData
+                        image = bencanaItem.image,
+                        name = bencanaItem.name,
+                        creator = bencanaItem.creator,
+                        date = bencanaItem.date,
+                        location = bencanaItem.locate
+                    )
                 }
             }
         }

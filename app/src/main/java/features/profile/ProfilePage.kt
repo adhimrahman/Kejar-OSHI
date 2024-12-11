@@ -26,7 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.kejaroshi.R
-import com.example.kejaroshi.ui.theme.*
+import com.example.kejaroshi.presentation.ui.theme.hijautua
 import components.BottomNavigationBar
 
 

@@ -1,6 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+//    id("com.android.application")
+    // Add the Google services Gradle plugin
+
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -9,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kejaroshi"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -62,6 +67,8 @@ dependencies {
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.animation.core.lint)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,5 +86,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation (libs.coil.compose)
+
+    // Import the Firebase BoM
+
+    implementation(platform(libs.firebase.bom))
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation(libs.firebase.analytics)
+
 
 }

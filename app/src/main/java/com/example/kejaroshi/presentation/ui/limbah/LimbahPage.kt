@@ -1,4 +1,4 @@
-package features.lingkungan
+package com.example.kejaroshi.presentation.ui.limbah
 
 
 import androidx.compose.foundation.Image
@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,14 +28,24 @@ import androidx.navigation.compose.rememberNavController
 import components.BottomNavigationBar
 import components.CardComponent
 import com.example.kejaroshi.R
-import com.example.kejaroshi.ui.theme.*
+import com.example.kejaroshi.presentation.ui.theme.hijautua
 import components.SearchBar
-import okhttp3.internal.checkOffsetAndCount
-
 
 @Composable
-fun LingkunganPage(navController: NavController) {
-    var selectedTab by remember {mutableStateOf("lingkungan")}
+fun LimbahPage(
+    navController: NavController,
+    limbahViewModel: LimbahViewModel = remember { LimbahViewModel() }  // Get ViewModel instance
+) {
+    // Observe the state from ViewModel
+    val limbahList = limbahViewModel.limbahList
+
+    // Fetch data on initial load
+    LaunchedEffect(true) {
+        limbahViewModel.fetchLimbahData()
+    }
+
+
+    var selectedTab by remember {mutableStateOf("limbah")}
     Scaffold (
         topBar = {
             Row(modifier = Modifier
@@ -43,7 +54,7 @@ fun LingkunganPage(navController: NavController) {
                 .height(70.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
-                {
+            {
                 Image(
                     painter = painterResource(id = R.drawable.logo),
                     contentDescription = "dfdsfd",
@@ -51,7 +62,7 @@ fun LingkunganPage(navController: NavController) {
                     modifier = Modifier.padding(all = 19.dp)
                 )
                 Text("Sigap Bersama", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = Dp(8f)), color = Color.White)
-                }
+            }
         },
         bottomBar = {
             BottomNavigationBar(
@@ -60,7 +71,7 @@ fun LingkunganPage(navController: NavController) {
                 onTabSelected = { selectedTab = it }
             )
         }
-        ) { innerPadding ->
+    ) { innerPadding ->
         Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -68,18 +79,27 @@ fun LingkunganPage(navController: NavController) {
                 .fillMaxWidth()
                 .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.Center)
-                {
-                    Text(text = "Limbah", fontSize = 40.sp, fontWeight = FontWeight.Bold)
-                }
+            {
+                Text(text = "Limbah", fontSize = 40.sp, fontWeight = FontWeight.Bold)
+            }
 
             SearchBar()
 
-            LazyColumn {
-                items(1) {
-                    CardComponent(image = R.drawable.crara , name = "Duta Pariwisata", creator = "Mirsa Bintang" )
-                }
-                items(count = 2) {
-                    CardComponent(image = R.drawable.zakyella4ever, name = "Limbah PLTU Makassar", creator = "P Diddy", date = "09-09-2029")
+            LazyColumn(
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                items(limbahList.size) { index ->
+                    val limbahItem = limbahList[index]
+                    CardComponent(
+                        navController = navController,
+                        detailPath = "detail",
+                        id = limbahItem.name, // Assuming 'id' is a property of EnvironmentData
+                        image = limbahItem.image,
+                        name = limbahItem.name,
+                        creator = limbahItem.creator,
+                        date = limbahItem.date,
+                        location = limbahItem.locate
+                    )
                 }
             }
         }
@@ -88,7 +108,7 @@ fun LingkunganPage(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewLandingPage (){
+fun PreviewLimbahPage (){
     val navController = rememberNavController()
-    LingkunganPage(navController = navController)
+    LimbahPage(navController = navController)
 }

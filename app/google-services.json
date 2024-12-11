@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "29780994530",
+    "project_id": "sigap-bersama-c60a3",
+    "storage_bucket": "sigap-bersama-c60a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29780994530:android:9874cd8138c3cb71bd71bb",
+        "android_client_info": {
+          "package_name": "com.example.kejaroshi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29780994530-f6in7mjem5b8chqa33ebaa27fs5r90k5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDVJyFo3qQleGOjc-wkx5i01w9ak6V3Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29780994530-f6in7mjem5b8chqa33ebaa27fs5r90k5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
