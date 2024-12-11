@@ -29,6 +29,7 @@ import components.CardComponent
 import com.example.kejaroshi.R
 import com.example.kejaroshi.ui.theme.*
 import components.SearchBar
+import okhttp3.internal.checkOffsetAndCount
 
 
 @Composable
@@ -74,8 +75,11 @@ fun LingkunganPage(navController: NavController) {
             SearchBar()
 
             LazyColumn {
-                items(10) {
-                    CardComponent(image = R.drawable.mirsakonyol)
+                items(1) {
+                    CardComponent(image = R.drawable.crara , name = "Duta Pariwisata", creator = "Mirsa Bintang" )
+                }
+                items(count = 2) {
+                    CardComponent(image = R.drawable.zakyella4ever, name = "Limbah PLTU Makassar", creator = "P Diddy", date = "09-09-2029")
                 }
             }
         }
