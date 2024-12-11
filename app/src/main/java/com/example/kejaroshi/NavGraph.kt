@@ -26,7 +26,7 @@ fun NavGraph(navController: NavHostController) {
         composable("lingkungan") { LingkunganPage(navController) }
         composable("signin") { SignInPage(navController) }
         composable("signup") { SignUpPage(navController) }
-        composable("profil") { ProfilePage(navController) }
+        composable("profile") { ProfilePage(navController) }
 
     }
 }

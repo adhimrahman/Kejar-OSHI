@@ -32,8 +32,8 @@ import components.SearchBar
 
 @Composable
 fun BencanaPage(navController: NavController) {
-    var selectedTab by remember {mutableStateOf("lingkungan")}
     val gambar : Int = R.drawable.zakyella4ever
+    var selectedTab by remember {mutableStateOf("bencana")}
     Scaffold (
         topBar = {
             Row(modifier = Modifier

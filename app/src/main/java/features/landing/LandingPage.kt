@@ -24,101 +24,122 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kejaroshi.R
 import androidx.compose.foundation.background
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
+import com.example.kejaroshi.ui.theme.hijautua
+import components.BottomNavigationBar
 
 @Composable
 fun LandingPage(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        // Header Section
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.bege),
-                contentDescription = "Background",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            Text(
-                text = "SIGAP BERSAMA",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
+    var selectedTab by remember { mutableStateOf("home") }
+    Scaffold(
+        topBar = {  },
+        bottomBar = {
+            BottomNavigationBar(
+                navController = navController,
+                selectedTab = selectedTab,
+                onTabSelected = { selectedTab = it }
             )
         }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        // Statistics Section
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                StatisticItem(text = "Relawan 123.456", iconResId = R.drawable.logo)
-                StatisticItem(text = "Komunitas 123.456", iconResId = R.drawable.logo)
-                StatisticItem(text = "Event 123.456", iconResId = R.drawable.logo)
-            }
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        // Description Section
+    ) { innerPadding ->
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .align(Alignment.CenterHorizontally)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
         ) {
-            Text(
-                text = "Dalam beberapa tahun terakhir, peningkatan jumlah bencana alam dan pencemaran lingkungan, telah menjadi tantangan utama di Indonesia. Meskipun berbagai organisasi dan masyarakat berusaha untuk berpartisipasi, masih ada keterbatasan dalam akses informasi dan koordinasi untuk relawan yang ingin terlibat. Sigap Bersama hadir untuk menghubungkan relawan dengan kegiatan tanggap bencana dan kampanye pembersihan lingkungan, menciptakan wadah yang efektif bagi masyarakat untuk berkontribusi.",
-                fontSize = 16.sp,
-                lineHeight = 24.sp,
-                textAlign = TextAlign.Justify
-            )
+            // Header Section
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.bege),
+                    contentDescription = "Background",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+                Text(
+                    text = "SIGAP BERSAMA",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Statistics Section
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    StatisticItem(text = "Relawan 123.456", iconResId = R.drawable.logo)
+                    StatisticItem(text = "Komunitas 123.456", iconResId = R.drawable.logo)
+                    StatisticItem(text = "Event 123.456", iconResId = R.drawable.logo)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Description Section
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(
+                    text = "Dalam beberapa tahun terakhir, peningkatan jumlah bencana alam dan pencemaran lingkungan, telah menjadi tantangan utama di Indonesia. Meskipun berbagai organisasi dan masyarakat berusaha untuk berpartisipasi, masih ada keterbatasan dalam akses informasi dan koordinasi untuk relawan yang ingin terlibat. Sigap Bersama hadir untuk menghubungkan relawan dengan kegiatan tanggap bencana dan kampanye pembersihan lingkungan, menciptakan wadah yang efektif bagi masyarakat untuk berkontribusi.",
+                    fontSize = 16.sp,
+                    lineHeight = 24.sp,
+                    textAlign = TextAlign.Justify
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // SIGAP BENCANA Section
+            CustomCard(
+                title = "SIGAP BENCANA",
+                description = "Lebih banyak relawan, lebih besar dampaknya. Ada beragam pilihan aktivitas yang dapat diikuti untuk membuat perubahan besar.",
+                imageResId = R.drawable.bege,
+                buttonText = "Lihat Aktivitas Lain"
+            ) {
+                navController.navigate("bencana")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // SIGAP LINGKUNGAN Section
+            CustomCard(
+                title = "SIGAP LINGKUNGAN",
+                description = "Bergabunglah untuk melestarikan lingkungan. Pilihan aktivitas yang menyenangkan untuk dampak yang nyata.",
+                imageResId = R.drawable.bege,
+                buttonText = "Lihat Aktivitas Lain"
+            ) {
+                navController.navigate("lingkungan")
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.weight(1f)) // Mendorong footer ke bawah
+            Footer()
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // SIGAP BENCANA Section
-        CustomCard(
-            title = "SIGAP BENCANA",
-            description = "Lebih banyak relawan, lebih besar dampaknya. Ada beragam pilihan aktivitas yang dapat diikuti untuk membuat perubahan besar.",
-            imageResId = R.drawable.bege,
-            buttonText = "Lihat Aktivitas Lain"
-        ) {
-            navController.navigate("bencana")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // SIGAP LINGKUNGAN Section
-        CustomCard(
-            title = "SIGAP LINGKUNGAN",
-            description = "Bergabunglah untuk melestarikan lingkungan. Pilihan aktivitas yang menyenangkan untuk dampak yang nyata.",
-            imageResId = R.drawable.bege,
-            buttonText = "Lihat Aktivitas Lain"
-        ) {
-            navController.navigate("lingkungan")
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-        Spacer(modifier = Modifier.weight(1f)) // Mendorong footer ke bawah
-        Footer()
     }
 }
 
