@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.kejaroshi.R
 
@@ -46,6 +45,8 @@ fun HomeScreen(navController: NavController) {
             // Menampilkan konten berdasarkan tab aktif
             when (selectedTab) {
                 "home" -> HomeContent(navController)
+                "bencana" -> BencanaContent(navController)
+                "lingkungan" -> LingkunganContent(navController)
                 "profile" -> ProfileContent(navController)
                 "settings" -> SettingsContent(navController)
             }
@@ -98,6 +99,16 @@ fun HomeContent(navController: NavController) {
             }
         }
     }
+}
+
+@Composable
+fun BencanaContent(navController: NavController) {
+
+}
+
+@Composable
+fun LingkunganContent(navController: NavController) {
+
 }
 
 @Composable
@@ -219,6 +230,34 @@ fun BottomNavigationBar(
             ),
             onClick = {
                 onTabSelected("home")
+            }
+        )
+
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Home, contentDescription = "Bencana") },
+            label = { Text("Bencana") },
+            selected = selectedTab == "bencana",
+            alwaysShowLabel = true,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color(0xFFE91E63),
+                unselectedIconColor = Color.Gray,
+            ),
+            onClick = {
+                onTabSelected("bencana")
+            }
+        )
+
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Home, contentDescription = "Lingkungan") },
+            label = { Text("Lingkungan") },
+            selected = selectedTab == "lingkungan",
+            alwaysShowLabel = true,
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color(0xFFE91E63),
+                unselectedIconColor = Color.Gray,
+            ),
+            onClick = {
+                onTabSelected("linkungan")
             }
         )
 
