@@ -10,11 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.example.kejaroshi.R
+import com.example.kejaroshi.ui.theme.*
+
 
 @Composable
 fun ProfilePage(navController: NavController) {
@@ -90,16 +94,16 @@ fun ProfilePage(navController: NavController) {
                 TextField(value = "", onValueChange = {}, label = { Text("Password") },
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
-                        IconButton(onClick = { /* Handle visibility toggle */ }) {
-                            Icon(painterResource(id = R.drawable.ic_visibility), contentDescription = "Toggle Password Visibility")
-                        }
+//                        IconButton(onClick = { /* Handle visibility toggle */ }) {
+//                            Icon(painterResource(id = R.drawable.ic_visibility), contentDescription = "Toggle Password Visibility")
+//                        }
                     })
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { /* Handle edit action */ },
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    Text("Edit")
+                    Text("Edit", color = hijautua)
                 }
             }
         }
@@ -125,9 +129,9 @@ fun ProfilePage(navController: NavController) {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewProfilePage() {
-//    val navController = rememberNavController()
-//    ProfilePage(navController = navController)
-//}
+@Preview(showBackground = true)
+@Composable
+fun PreviewProfilePage() {
+    val navController = rememberNavController()
+    ProfilePage(navController = navController)
+}
